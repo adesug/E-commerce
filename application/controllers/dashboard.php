@@ -15,8 +15,15 @@
             }
             
         }
-        
-       
+        public function index()
+        {
+            $data['barang'] = $this->model_barang->tampil_data()->result();
+            $this->load->view('templates/header');
+            $this->load->view('templates/sidebar');
+            $this->load->view('dashboard',$data);
+            $this->load->view('templates/footer');   
+        } 
+
         public function tambah_ke_keranjang($id)
         {
             $barang =$this->model_barang->find($id);
@@ -31,6 +38,8 @@
             $this->cart->insert($data);
             redirect('welcome');
         }
+
+        
 
         public function detail_keranjang()
         {
@@ -77,6 +86,15 @@
             $this->load->view('detail_barang',$data);
             $this->load->view('templates/footer');
        }
+       public function search(){
+
+            $keyword = $this->input->post('keyword'); 
+            $data['barang']=$this->model_barang->get_keyword($keyword);
+               $this->load->view('templates/header');
+               $this->load->view('templates/sidebar');
+               $this->load->view('dashboard',$data);
+               $this->load->view('templates/footer');   
+   }
 
     }
 

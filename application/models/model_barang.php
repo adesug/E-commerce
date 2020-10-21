@@ -42,5 +42,17 @@
                 return false;
             }
         }
+        public function get_keyword($keyword){
+            $this->db->select('*');
+            $this->db->from('tb_barang');
+            $this->like->from('nama_brg',$keyword);
+            $this->or_like->from('keterangan',$keyword);
+            $this->or_like->from('kategori',$keyword);
+            $this->or_like->from('harga',$keyword);
+            $this->or_like->from('stok',$keyword);
+            $this->or_like->from('gambar',$keyword);
+            return $this->db->get()->result();		 
+      
+      }
 
     }
